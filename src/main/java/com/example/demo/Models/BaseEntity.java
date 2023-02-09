@@ -1,2 +1,9 @@
-package com.example.demo.Models;public class BaseEntity {
+package com.example.demo.Models;
+
+import java.util.Date;
+
+public class BaseEntity {
+    Integer id;
+  Date createdDate;
+  Date updaetedDate;
 }
