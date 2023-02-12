@@ -14,8 +14,9 @@ public class School {
 
    @Column(name = "school_name")
     String name;
-   
-    List<Student>students;
+//   @ManyToOne
+//   @JoinColumn(name="id",referencedColumnName="id")
+//    List<Student>students;
 
     public Integer getId() {
         return id;
@@ -33,12 +34,6 @@ public class School {
         this.name = name;
     }
 
-    public List<Student> getStudents() {
-        return students;
-    }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
 
 }

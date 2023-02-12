@@ -9,6 +9,17 @@ public class course {
     Integer id;
     @Column(name = "course_name")
     String name;
+    @ManyToOne
+    @JoinColumn(name = "student_id",referencedColumnName="id")
+Student student;
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 
     public Integer getId() {
         return id;
@@ -26,13 +37,7 @@ public class course {
         this.name = name;
     }
 
-    public List<Mark> getMarks() {
-        return marks;
-    }
 
-    public void setMarks(List<Mark> marks) {
-        this.marks = marks;
-    }
 
-    List<Mark>marks;
+
 }

@@ -1,9 +1,6 @@
 package com.example.demo.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Mark {
@@ -11,7 +8,8 @@ public class Mark {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     Integer obtainedMarks;
-
+    @ManyToOne
+    @JoinColumn(name="cource_id",referencedColumnName="id")
     public Integer getId() {
         return id;
     }
