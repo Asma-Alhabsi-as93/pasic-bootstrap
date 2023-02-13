@@ -111,9 +111,17 @@ public class GeneralController {
         return student;
     }
         @RequestMapping(value = "School/getBySchoolName", method = RequestMethod.GET)
-        public School getStudentBySchoolName(@RequestParam String SchoolName) {
-            School school = schoolService.getStudentBySchoolName(SchoolName);
+        public School getSchooltBySchoolName(@RequestParam String SchoolName) {
+            School school = schoolService.getSchooltBySchoolName(SchoolName);
             return school;
 
         }
-}
+
+
+    @RequestMapping(value = "Student/getBySchoolName", method = RequestMethod.GET)
+    public List <Student> getStudentBySchoolName(@RequestParam String schoolName) {
+        return studentService.getStudentBySchoolName(schoolName);
+    }
+
+    }
+

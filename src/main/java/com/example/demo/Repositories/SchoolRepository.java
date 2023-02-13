@@ -17,8 +17,8 @@ public interface SchoolRepository extends CrudRepository<School, Integer> {
     @Query(value = "SELECT s from School s where s.id =:schoolId")
     School getSchoolById(@Param("schoolId")Integer schoolId);
 
-    @Query(value = "SELECT s from School s where s.name =:schoolName")
-    School getSchoolBySchoolName(@Param("schoolName")String schoolName);
+    @Query(value = "SELECT s from School s "+" where s.name =:schoolName")
+    School getSchooltBySchoolName(@Param("schoolName")String schoolName);
 }
     
 

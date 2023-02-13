@@ -29,8 +29,8 @@ public  class SchoolService {
         return school;
     }
 
-    public School getStudentBySchoolName(String SchoolName){
-        School school=  schoolRepository.getSchoolBySchoolName(SchoolName);
+    public School getSchooltBySchoolName(String SchoolName){
+        School school=  schoolRepository.getSchooltBySchoolName(SchoolName);
         return school;
     }
 }
