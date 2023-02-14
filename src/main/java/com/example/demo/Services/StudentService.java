@@ -44,6 +44,13 @@ public class StudentService {
     List<Student>studentList=studentRepository.getStudentBySchoolId(schoolId);
     return  studentList;
     }
+    public List<Student> getByActive(){
+    return studentRepository.getByActive();
 
+    }
+    public List<Student> getByInActive(){
+        return studentRepository.getByInActive();
+
+    }
 
 }

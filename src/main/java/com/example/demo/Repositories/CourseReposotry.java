@@ -19,5 +19,12 @@ import java.util.List;
 
         @Query(value = "SELECT s from course s where s.id =:courseId")
         course getCourseById(@Param("courseId")Integer courseId);
+
+        @Query(value = "SELECT s from course s where s.isActive = 1")
+        List<course> getByActive();
+
+        @Query(value = "SELECT s from course s where s.isActive = 0")
+        List<course> getByInActive();
+
     }
 

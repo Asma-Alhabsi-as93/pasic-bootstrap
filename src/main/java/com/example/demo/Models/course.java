@@ -3,7 +3,7 @@ package com.example.demo.Models;
 import javax.persistence.*;
 import java.util.List;
 @Entity
-public class course {
+public class course extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;

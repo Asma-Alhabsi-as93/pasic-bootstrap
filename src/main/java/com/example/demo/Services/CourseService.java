@@ -20,4 +20,12 @@ public class CourseService {
         course course = courseReposotry.getCourseById(courseId);
         return course;
     }
+    public List<course> getByActive(){
+        return courseReposotry.getByActive();
+
+    }
+    public List<course> getByInActive(){
+        return courseReposotry.getByInActive();
+
+    }
 }

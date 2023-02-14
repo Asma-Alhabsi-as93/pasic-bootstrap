@@ -33,4 +33,12 @@ public  class SchoolService {
         School school=  schoolRepository.getSchooltBySchoolName(SchoolName);
         return school;
     }
+    public List<School> getByActive(){
+        return schoolRepository.getAllActiveSchools();
+
+      }
+    public List<School> getByInActive(){
+        return schoolRepository.getAllInActiveSchools();
+
+    }
 }
