@@ -25,6 +25,7 @@ import java.util.List;
 
         @Query(value = "SELECT s from course s where s.isActive = 0")
         List<course> getByInActive();
-
+        @Query(value = "SELECT s from course s "+" where s.name =:courseName")
+        course getByCourselName(@Param("courseName")String courseName);
     }
 

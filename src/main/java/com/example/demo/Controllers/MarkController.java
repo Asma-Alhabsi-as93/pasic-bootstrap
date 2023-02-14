@@ -31,11 +31,17 @@ public class MarkController {
         return mark;
     }
 
-    @RequestMapping(value ="getByActive")
+    @RequestMapping(value = "getByActive")
     public List<Mark> getByInActive() {
         List<Mark> InActiveMarkList = markService.getByInActive();
-        return  InActiveMarkList ;
+        return InActiveMarkList;
 
     }
 
+//    @RequestMapping(value = "getByMarkName", method = RequestMethod.GET)
+//    public Mark getByMarkName(@RequestParam String MarklName) {
+//        Mark mark = markService.getByMarkName(MarklName);
+//        return mark;
+//
+//    }
 }

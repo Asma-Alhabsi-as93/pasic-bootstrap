@@ -52,5 +52,9 @@ public class StudentService {
         return studentRepository.getByInActive();
 
     }
+    public Student getStudenttByName(String StudentName){
+        Student student=  studentRepository.getStudenttByName(StudentName);
+        return student;
+    }
 
 }

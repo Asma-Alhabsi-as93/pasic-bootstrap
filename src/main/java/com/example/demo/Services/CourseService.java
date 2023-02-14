@@ -28,4 +28,8 @@ public class CourseService {
         return courseReposotry.getByInActive();
 
     }
+    public course getByCourselName(String CourseName){
+        course course=courseReposotry.getByCourselName(CourseName);
+        return course;
+    }
 }

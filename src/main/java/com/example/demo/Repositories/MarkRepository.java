@@ -25,4 +25,7 @@ public interface MarkRepository extends CrudRepository<Mark, Integer> {
     @Query(value = "SELECT s from Mark s where s.isActive = 0")
     List<Mark> getByInActive();
 
+//    @Query(value = "SELECT s from Mark s "+" where s.name =:MarklName")
+//    Mark getByMarkName(@Param("MarklName")String MarklName);
+
 }

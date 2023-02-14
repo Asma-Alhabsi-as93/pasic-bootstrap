@@ -46,16 +46,24 @@ public class StudentController {
         return student;
 
     }
-    @RequestMapping(value ="getByActive")
+
+    @RequestMapping(value = "getByActive")
     public List<Student> getByActive() {
         List<Student> activeStudentList = studentService.getByActive();
-        return  activeStudentList ;
+        return activeStudentList;
 
     }
-    @RequestMapping(value ="getByInActive")
+
+    @RequestMapping(value = "getByInActive")
     public List<Student> getByInActive() {
         List<Student> InActiveStudentList = studentService.getByInActive();
-        return  InActiveStudentList ;
+        return InActiveStudentList;
 
+    }
+
+    @RequestMapping(value = "getByStudentName", method = RequestMethod.GET)
+    public Student getStudenttByName(@RequestParam String StudentName) {
+        Student student = studentService.getStudenttByName(StudentName);
+        return student;
     }
 }

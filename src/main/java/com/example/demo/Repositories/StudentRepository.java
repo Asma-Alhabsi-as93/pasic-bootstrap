@@ -25,4 +25,7 @@ public interface StudentRepository extends CrudRepository<Student, Integer> {
     List<Student> getByActive();
     @Query(value = "SELECT s from Student s where s.isActive = 0")
     List<Student> getByInActive();
+
+    @Query(value = "SELECT s from Student s "+" where s.name =:studentName")
+    Student getStudenttByName(@Param("studentName")String studentName);
 }

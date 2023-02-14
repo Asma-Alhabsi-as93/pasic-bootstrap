@@ -29,4 +29,8 @@ public class MarkService {
         return markRepository.getByInActive();
 
     }
+//    public Mark getByMarkName(String MarklName){
+//        Mark mark=  markRepository.getByMarkName(MarklName);
+//        return mark;
+//    }
 }
