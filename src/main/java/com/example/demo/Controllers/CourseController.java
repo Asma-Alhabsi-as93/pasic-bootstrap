@@ -4,10 +4,7 @@ import com.example.demo.Models.School;
 import com.example.demo.Models.course;
 import com.example.demo.Services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -49,5 +46,12 @@ public class CourseController {
     public course getByCourselName(@RequestParam String CourseName) {
         course course = courseService.getByCourselName(CourseName);
         return course;
+    }
+
+    @GetMapping(value = "deleteById")
+    public String deleteCoursrById(@RequestParam Integer courseId) {
+
+        courseService.deleteCoursrById(courseId);
+        return "Record Deleted Successfully :)";
     }
 }

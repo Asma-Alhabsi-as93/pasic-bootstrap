@@ -32,4 +32,8 @@ public class CourseService {
         course course=courseReposotry.getByCourselName(CourseName);
         return course;
     }
+    public void deleteCoursrById(Integer courseId) {
+        course courseToDelete =courseReposotry.findById(courseId).get();
+        courseReposotry.delete(courseToDelete);
+    }
 }

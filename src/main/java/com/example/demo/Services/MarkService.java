@@ -2,6 +2,7 @@ package com.example.demo.Services;
 
 import com.example.demo.Models.Mark;
 import com.example.demo.Models.School;
+import com.example.demo.Models.course;
 import com.example.demo.Repositories.MarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,4 +34,9 @@ public class MarkService {
 //        Mark mark=  markRepository.getByMarkName(MarklName);
 //        return mark;
 //    }
+
+    public void deleteMarkById(Integer Id) {
+        Mark markToDelete =markRepository.findById(Id).get();
+        markRepository.delete(markToDelete);
+    }
 }

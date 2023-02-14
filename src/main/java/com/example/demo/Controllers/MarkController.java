@@ -4,10 +4,7 @@ import com.example.demo.Models.Mark;
 import com.example.demo.Models.School;
 import com.example.demo.Services.MarkService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
@@ -44,4 +41,11 @@ public class MarkController {
 //        return mark;
 //
 //    }
+
+    @GetMapping(value = "deleteById")
+    public String deleteMarkById(@RequestParam Integer id) {
+
+        markService.deleteMarkById(id);
+        return "Record Deleted Successfully :)";
+    }
 }

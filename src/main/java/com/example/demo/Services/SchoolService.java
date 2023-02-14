@@ -46,4 +46,13 @@ public  class SchoolService {
         School school=  schoolRepository.getLatestRow();
         return school;
     }
+
+//    public School getLatestUpdated(){
+//        School school=  schoolRepository.getLatestUpdated();
+//        return school;
+//    }
+public void deleteSchoolById(Integer id) {
+    School schoolToDelete = schoolRepository.findById(id).get();
+    schoolRepository.delete(schoolToDelete);
+}
 }

@@ -3,10 +3,7 @@ package com.example.demo.Controllers;
 import com.example.demo.Models.School;
 import com.example.demo.Services.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,7 +13,7 @@ public class SchoolController {
     @Autowired
     SchoolService schoolService;
 
-    @RequestMapping(value = "school/getAll", method = RequestMethod.GET)
+    @RequestMapping(value = "getAll", method = RequestMethod.GET)
 
     public List<School> getAllSchool() {
 
@@ -24,13 +21,13 @@ public class SchoolController {
         return schools;
     }
 
-    @RequestMapping(value = "school/getById", method = RequestMethod.GET)
+    @RequestMapping(value = "getById", method = RequestMethod.GET)
     public School getSchoolById(@RequestParam Integer schoolId) {
         School school = schoolService.getSchoolById(schoolId);
         return school;
     }
 
-    @RequestMapping(value = "School/getBySchoolName", method = RequestMethod.GET)
+    @RequestMapping(value = "getBySchoolName", method = RequestMethod.GET)
     public School getSchooltBySchoolName(@RequestParam String SchoolName) {
         School school = schoolService.getSchooltBySchoolName(SchoolName);
         return school;
@@ -56,5 +53,18 @@ public class SchoolController {
         School school = schoolService.getLatestRow();
         return school;
 
+    } @RequestMapping(value = " getLatestUpdated", method = RequestMethod.GET)
+//    public School  getLatestUpdated() {
+//        School school = schoolService. getLatestUpdated();
+//        return school;
+//
+//    }
+//
+
+    @GetMapping(value = "deleteById")
+    public String deleteSchoolById(@RequestParam Integer id) {
+
+        schoolService.deleteSchoolById(id);
+        return "Record Deleted Successfully :)";
     }
 }
