@@ -15,6 +15,7 @@ import java.util.List;
 public class SchoolController {
     @Autowired
     SchoolService schoolService;
+
     @RequestMapping(value = "school/getAll", method = RequestMethod.GET)
 
     public List<School> getAllSchool() {
@@ -22,6 +23,7 @@ public class SchoolController {
         List<School> schools = schoolService.getAllSchooles();
         return schools;
     }
+
     @RequestMapping(value = "school/getById", method = RequestMethod.GET)
     public School getSchoolById(@RequestParam Integer schoolId) {
         School school = schoolService.getSchoolById(schoolId);
@@ -34,18 +36,25 @@ public class SchoolController {
         return school;
 
     }
-    @RequestMapping(value ="getByActive")
+
+    @RequestMapping(value = "getByActive")
     public List<School> getByActive() {
         List<School> activeSchoolsList = schoolService.getByActive();
-        return  activeSchoolsList ;
+        return activeSchoolsList;
 
     }
 
-    @RequestMapping(value ="getByInActive")
+    @RequestMapping(value = "getByInActive")
     public List<School> getByInActive() {
         List<School> inActiveSchoolsList = schoolService.getByInActive();
-        return  inActiveSchoolsList ;
+        return inActiveSchoolsList;
 
     }
 
+    @RequestMapping(value = "getLatestRow", method = RequestMethod.GET)
+    public School getLatestRow() {
+        School school = schoolService.getLatestRow();
+        return school;
+
+    }
 }

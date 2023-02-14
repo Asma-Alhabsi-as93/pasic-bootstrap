@@ -41,4 +41,9 @@ public  class SchoolService {
         return schoolRepository.getAllInActiveSchools();
 
     }
+
+    public School getLatestRow(){
+        School school=  schoolRepository.getLatestRow();
+        return school;
+    }
 }
