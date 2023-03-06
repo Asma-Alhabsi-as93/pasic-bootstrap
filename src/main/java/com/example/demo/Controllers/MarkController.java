@@ -6,6 +6,7 @@ import com.example.demo.Services.MarkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 @RestController
 @RequestMapping(value = "mark")
@@ -47,5 +48,26 @@ public class MarkController {
 
         markService.deleteMarkById(id);
         return "Record Deleted Successfully :)";
+    }
+
+
+    @RequestMapping(value = "getLatestRow", method = RequestMethod.GET)
+    public Mark getLatestRow() {
+        Mark mark = markService.getLatestRow();
+        return mark;
+
+    }
+
+    @RequestMapping(value = " getLatestUpdated", method = RequestMethod.GET)
+    public Mark getLatestUpdated() {
+        Mark mark = markService.getLatestUpdated();
+        return mark;
+    }
+
+    @RequestMapping(value = "getMarkCreatedAfterDate" ,method = RequestMethod.GET)
+    public List<Mark> getMarkCreatedAfterDate(@RequestParam String createdDate ) throws ParseException {
+        List<Mark> marks = markService.getMarkCreatedAfterDate(createdDate);
+        return marks;
+
     }
 }

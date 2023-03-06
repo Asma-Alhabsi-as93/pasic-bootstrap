@@ -7,6 +7,10 @@ import com.example.demo.Repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -39,7 +43,7 @@ public class StudentService {
         return student;
     }
     public List<Student>getStudentBySchoolName(String schoolName){
-    School school=schoolRepository.getSchooltBySchoolName(schoolName);
+    School school=schoolRepository.getSchoolBySchoolName(schoolName);
     Integer schoolId=school.getId();
     List<Student>studentList=studentRepository.getStudentBySchoolId(schoolId);
     return  studentList;
@@ -55,6 +59,23 @@ public class StudentService {
     public Student getStudenttByName(String StudentName){
         Student student=  studentRepository.getStudenttByName(StudentName);
         return student;
+    }
+
+    public Student getLatestRow(){
+        Student student=  studentRepository.getLatestRow();
+        return student;
+    }
+
+    public Student getLatestUpdated(){
+        Student student=  studentRepository.getLatestUpdated();
+        return student;
+    }
+
+    public List<Student> getStudentCreatedAfterDate(String date) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        List<Student>students = studentRepository.getStudentCreatedAfterDate(convertedDateFromStringToDateFormat);
+        return students;
     }
 
 }

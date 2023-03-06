@@ -1,14 +1,14 @@
 package com.example.demo.Services;
 
 import com.example.demo.Models.School;
-import com.example.demo.Models.Student;
 import com.example.demo.Repositories.SchoolRepository;
-import com.example.demo.Repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,7 +19,7 @@ public  class SchoolService {
       SchoolRepository schoolRepository;
 
       public  List<School> getAllSchooles(){
-      return schoolRepository.getAllSchooles();
+      return schoolRepository.getAllSchools();
 
   }
 
@@ -30,7 +30,7 @@ public  class SchoolService {
     }
 
     public School getSchooltBySchoolName(String SchoolName){
-        School school=  schoolRepository.getSchooltBySchoolName(SchoolName);
+        School school=  schoolRepository.getSchoolBySchoolName(SchoolName);
         return school;
     }
     public List<School> getByActive(){
@@ -47,12 +47,52 @@ public  class SchoolService {
         return school;
     }
 
-//    public School getLatestUpdated(){
-//        School school=  schoolRepository.getLatestUpdated();
-//        return school;
-//    }
+    public School getLatestUpdated(){
+       School school=  schoolRepository.getLatestUpdated();
+       return school;
+   }
 public void deleteSchoolById(Integer id) {
     School schoolToDelete = schoolRepository.findById(id).get();
-    schoolRepository.delete(schoolToDelete);
+    schoolToDelete.setActive(false);
+    schoolRepository.save(schoolToDelete);
 }
+
+    public void setCreatedDateByUserInput(String stringdate, Integer id) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(stringdate);
+        School school = schoolRepository.getSchoolById(id);
+        school.setCreatedDate(convertedDateFromStringToDateFormat);
+        schoolRepository.save(school);
+    }
+
+    public List<School> getSchoolCreatedAfterDate(String date) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        List<School>schools = schoolRepository.getSchoolCreatedAfterDate(convertedDateFromStringToDateFormat);
+        return schools;
+    }
+
+
+
+    public List<School> getSchoolCreateddDate(String date) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        List<School>schools = schoolRepository.getSchoolCreatedDate(convertedDateFromStringToDateFormat);
+        return schools;
+      }
+    public List<School> getSchoolUpdatedDate(String date) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        List<School>schools = schoolRepository.getSchoolUpdatedDate(convertedDateFromStringToDateFormat);
+        return schools;
+    }
+
+    public void deleteAll() {
+     Iterable<School> school = schoolRepository.findAll();
+       for (School school1:school){
+           school1.setActive(false);
+       }
+       schoolRepository.saveAll(school);
+    }
+
 }

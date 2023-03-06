@@ -1,10 +1,12 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.Models.School;
+import com.example.demo.RequstObject.SchoolRequestForCreateDateUpdate;
 import com.example.demo.Services.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -53,13 +55,14 @@ public class SchoolController {
         School school = schoolService.getLatestRow();
         return school;
 
-    } @RequestMapping(value = " getLatestUpdated", method = RequestMethod.GET)
-//    public School  getLatestUpdated() {
-//        School school = schoolService. getLatestUpdated();
-//        return school;
-//
-//    }
-//
+    }
+    @RequestMapping(value = " getLatestUpdated", method = RequestMethod.GET)
+    public School  getLatestUpdated() {
+     School school = schoolService. getLatestUpdated();
+       return school;
+
+  }
+
 
     @GetMapping(value = "deleteById")
     public String deleteSchoolById(@RequestParam Integer id) {
@@ -67,4 +70,34 @@ public class SchoolController {
         schoolService.deleteSchoolById(id);
         return "Record Deleted Successfully :)";
     }
+
+  @GetMapping(value = "deleteAll")
+    public void deleteAll() {
+     schoolService.deleteAll();
+
+    }
+
+    @RequestMapping(value ="UpdateCreateDataByUserInput",method=RequestMethod.POST)
+    public void setUpdateByUserInput(@RequestParam SchoolRequestForCreateDateUpdate data)throws ParseException {
+        schoolService.setCreatedDateByUserInput(data.getDate(),data.getId());
+    }
+
+    @RequestMapping(value = "getSchoolCreatedAfterDate" ,method = RequestMethod.GET)
+    public List<School> getSchoolCreatedAfterDate(@RequestParam String createdDate ) throws ParseException {
+        List<School> schools = schoolService.getSchoolCreatedAfterDate(createdDate);
+        return schools;
+    }
+    @RequestMapping(value = "getSchoolCreateddDate" ,method = RequestMethod.GET)
+    public List<School> getSchoolCreateddDate(@RequestParam String createdDate ) throws ParseException {
+        List<School> schools = schoolService.getSchoolCreateddDate(createdDate);
+        return schools;
+
+    }
+    @RequestMapping(value = "getSchoolUpdatedDate" ,method = RequestMethod.GET)
+    public List<School> getSchoolUpdatedDate(@RequestParam String updateDate ) throws ParseException {
+        List<School> schools = schoolService.getSchoolUpdatedDate(updateDate);
+        return schools;
+
+    }
 }
+

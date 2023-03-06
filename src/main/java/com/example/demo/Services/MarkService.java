@@ -7,6 +7,10 @@ import com.example.demo.Repositories.MarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -38,5 +42,22 @@ public class MarkService {
     public void deleteMarkById(Integer Id) {
         Mark markToDelete =markRepository.findById(Id).get();
         markRepository.delete(markToDelete);
+    }
+
+    public Mark getLatestRow(){
+        Mark mark=  markRepository.getLatestRow();
+        return mark;
+    }
+
+    public Mark getLatestUpdated(){
+        Mark mark=  markRepository.getLatestUpdated();
+        return mark;
+    }
+
+    public List<Mark> getMarkCreatedAfterDate(String date) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        List<Mark>marks = markRepository.getMarkCreatedAfterDate(convertedDateFromStringToDateFormat);
+        return marks;
     }
 }

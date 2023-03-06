@@ -6,6 +6,7 @@ import com.example.demo.Services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -14,7 +15,7 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    @RequestMapping(value = "getAll", method = RequestMethod.GET)
 
     public List<Student> getAllStudents() {
 
@@ -40,7 +41,7 @@ public class StudentController {
         return "Hello Student";
     }
 
-    @RequestMapping(value = "student/getById", method = RequestMethod.GET)
+    @RequestMapping(value = "getById", method = RequestMethod.GET)
     public Student getStudentById(@RequestParam Integer studentId) {
         Student student = studentService.getStudentById(studentId);
         return student;
@@ -65,5 +66,26 @@ public class StudentController {
     public Student getStudenttByName(@RequestParam String StudentName) {
         Student student = studentService.getStudenttByName(StudentName);
         return student;
+    }
+
+    @RequestMapping(value = "getLatestRow", method = RequestMethod.GET)
+    public Student getLatestRow() {
+        Student student = studentService.getLatestRow();
+        return student;
+    }
+
+    @RequestMapping(value = " getLatestUpdated", method = RequestMethod.GET)
+    public Student  getLatestUpdated() {
+        Student student = studentService. getLatestUpdated();
+        return student;
+
+    }
+    @RequestMapping(value = "getStudentCreatedAfterDate" ,method = RequestMethod.GET)
+    public List<Student> getStudentCreatedAfterDate(@RequestParam String createdDate ) throws ParseException {
+        List<Student> students = studentService.getStudentCreatedAfterDate(createdDate);
+        return students;
+
+
+
     }
 }
