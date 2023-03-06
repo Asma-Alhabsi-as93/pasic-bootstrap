@@ -75,17 +75,35 @@ public class StudentController {
     }
 
     @RequestMapping(value = " getLatestUpdated", method = RequestMethod.GET)
-    public Student  getLatestUpdated() {
-        Student student = studentService. getLatestUpdated();
+    public Student getLatestUpdated() {
+        Student student = studentService.getLatestUpdated();
         return student;
 
     }
-    @RequestMapping(value = "getStudentCreatedAfterDate" ,method = RequestMethod.GET)
-    public List<Student> getStudentCreatedAfterDate(@RequestParam String createdDate ) throws ParseException {
+
+    @RequestMapping(value = "getStudentCreatedAfterDate", method = RequestMethod.GET)
+    public List<Student> getStudentCreatedAfterDate(@RequestParam String createdDate) throws ParseException {
         List<Student> students = studentService.getStudentCreatedAfterDate(createdDate);
         return students;
 
+    }
 
+    @RequestMapping(value = "getStudentCreateddDate", method = RequestMethod.GET)
+    public List<Student> getStudentByCreatedDate(@RequestParam String createdDate) throws ParseException {
+        List<Student> students=studentService.getStudentCreateddDate(createdDate);
+        return students;
+
+    }
+    @RequestMapping(value = "getStudentUpdatedDate" ,method = RequestMethod.GET)
+    public List<Student> getStudentUpdatedDate(@RequestParam String updateDate ) throws ParseException {
+        List<Student> students = studentService.getStudentUpdatedDate(updateDate);
+        return students;
+
+    }
+
+    @GetMapping(value = "deleteAll")
+    public void deleteAll() {
+        studentService.deleteAll();
 
     }
 }

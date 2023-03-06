@@ -30,7 +30,8 @@ public class StudentService {
 
     public void deleteStudentById(Integer id) {
         Student studentToDelete = studentRepository.findById(id).get();
-        studentRepository.delete(studentToDelete);
+        studentToDelete.setActive(false);
+        studentRepository.save(studentToDelete);
     }
 
     public List<Student>getAllStudents(){
@@ -77,5 +78,27 @@ public class StudentService {
         List<Student>students = studentRepository.getStudentCreatedAfterDate(convertedDateFromStringToDateFormat);
         return students;
     }
+
+    public List<Student> getStudentCreateddDate(String date) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        List<Student>students = studentRepository.getStudentCreateddDate(convertedDateFromStringToDateFormat);
+        return students;
+    }
+    public List<Student> getStudentUpdatedDate(String date) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        List<Student>students = studentRepository.getStudentUpdatedDate(convertedDateFromStringToDateFormat);
+        return students;
+    }
+
+    public void deleteAll() {
+        Iterable<Student> students = studentRepository.findAll();
+        for (Student student:students){
+            student.setActive(false);
+        }
+        studentRepository.saveAll(students);
+    }
+
 
 }

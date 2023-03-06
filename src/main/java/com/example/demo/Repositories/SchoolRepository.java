@@ -1,6 +1,7 @@
 package com.example.demo.Repositories;
 
 import com.example.demo.Models.School;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Date;
 import java.util.List;
 @Repository
-public interface SchoolRepository extends CrudRepository<School, Integer> {
+public interface SchoolRepository extends JpaRepository<School, Integer> {
 
     @Query(value = "SELECT s from School s")
     List<School> getAllSchools();
@@ -42,6 +43,14 @@ public interface SchoolRepository extends CrudRepository<School, Integer> {
 
     @Query(value ="SELECT s from School s where s.updatedDate = :updatedDate")
     List<School> getSchoolUpdatedDate(@Param("updatedDate")Date updatedDate);
+
+    @Query(value = "SELECT s from School s WHERE s.updatedDate > :updatedDate")
+    Iterable<School> findByUpdatedDate(@Param("updatedDate")Date updatedDate);
+
+//   @Query(value = "SELECT s from School s WHERE s.name = :name")
+//   Iterable<School> deleteBySchoolName(@Param("name")String name);
+
+
 }
 
     
