@@ -50,7 +50,11 @@ public interface SchoolRepository extends JpaRepository<School, Integer> {
 //   @Query(value = "SELECT s from School s WHERE s.name = :name")
 //   Iterable<School> deleteBySchoolName(@Param("name")String name);
 
+    @Query(value = "SELECT distinct (id) from School" , nativeQuery = true )
+    List<Integer> getDistinctSchoolIdsFromStudent();
 
+    @Query(value = "SELECT COUNT (id) from Schiil where id =?1",nativeQuery = true)
+    Integer getCountOfStudentsBySchoolId(Integer schoolId);
 }
 
     

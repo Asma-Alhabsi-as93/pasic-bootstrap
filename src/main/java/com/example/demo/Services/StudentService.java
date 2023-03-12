@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -100,5 +101,51 @@ public class StudentService {
         studentRepository.saveAll(students);
     }
 
+    public void findByUpdatedDate(Date updatedDate) {
+        Iterable<Student> students = studentRepository.getStudentUpdatedDate(updatedDate);
+        for (Student student : students) {
+            student.setActive(false);
+        }
+        studentRepository.saveAll(students);
+    }
+    public void deleteAllStudentCreatedAfterDate(String date) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        List<Student> students = studentRepository.getStudentCreatedAfterDate(convertedDateFromStringToDateFormat);
+        students.stream().forEach(s -> s.setActive(false));
+        studentRepository.saveAll(students);
+    }
 
+    public void deleteStudentlByCreatedDate(String date) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        List<Student> students = studentRepository.getStudentCreateddDate(convertedDateFromStringToDateFormat);
+        students.stream().forEach(s -> s.setActive(false));
+        studentRepository.saveAll(students);
+    }
+
+    public void deleteStudentByUpdateDate(String date) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDateFromStringToDateFormat = formatter.parse(date);
+        List<Student> students = (List<Student>) studentRepository.getStudentUpdatedDate(convertedDateFromStringToDateFormat);
+        students.stream().forEach(s -> s.setActive(false));
+        studentRepository.saveAll(students);
+    }
+
+
+//    public List<Student> getStudentBySchoolId(Integer schoolId  ) {
+//        List<Integer> typesOfSchoolIdsInStudent = studentRepository.getDistinctSchoolIdsFromStudent();
+//
+//        List<Integer> schoolIdThatUserWants = new ArrayList<>();
+//
+//        for (Integer idOfSchool : typesOfSchoolIdsInStudent) {
+//            Integer count = schoolRepository.getCountOfStudentsBySchoolId(idOfSchool);
+//            if (schoolId == count) {
+//                schoolIdThatUserWants.add(idOfSchool) ;
+//            }
+//        }
+//
+//        List<Student> STUDENTThatUserWasLookingFor = StudentRepository.findAllById(typesOfSchoolIdsInStudent);
+//        return STUDENTThatUserWasLookingFor;
+//    }
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -106,4 +107,33 @@ public class StudentController {
         studentService.deleteAll();
 
     }
+
+    @RequestMapping(value = "deleteAllStudentUpdatedDate", method = RequestMethod.GET)
+    public void findByUpdatedDate(Date updatedDate) {
+
+        studentService.findByUpdatedDate(updatedDate);
+    }
+
+    @RequestMapping(value = "deleteAllStudentCreatedAfterDate", method = RequestMethod.GET)
+    public void deleteAllStudentCreatedAfterDate(@RequestParam String createdDate) throws ParseException {
+        studentService.deleteAllStudentCreatedAfterDate(createdDate);
+
+    }
+
+    @RequestMapping(value = "deleteStudentlByCreatedDate", method = RequestMethod.POST)
+    public void deleteStudentlByCreatedDate(@RequestParam String createdDate) throws ParseException {
+        studentService.deleteStudentlByCreatedDate(createdDate);
+    }
+
+    @RequestMapping(value = "deleteStudentByUpdateDate", method = RequestMethod.POST)
+    public void deleteStudentByUpdateDate(@RequestParam String updatedDate) throws ParseException {
+        studentService.deleteStudentByUpdateDate(updatedDate);
+    }
+
+//    @RequestMapping(value = "getStudentsBySchoolId", method = RequestMethod.GET)
+//    public List<Student> getStudentBySchoolId(@RequestParam Integer schoolId) {
+//        List<Student> studentList = studentService.getStudentBySchoolId(schoolId);
+//        return studentList;
+//    }
+
 }
