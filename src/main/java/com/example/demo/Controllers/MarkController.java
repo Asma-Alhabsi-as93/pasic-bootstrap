@@ -2,7 +2,9 @@ package com.example.demo.Controllers;
 
 import com.example.demo.Models.Mark;
 import com.example.demo.Models.School;
+import com.example.demo.Models.course;
 import com.example.demo.Services.MarkService;
+import com.example.demo.Slack.SlackClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,12 +16,22 @@ import java.util.List;
 public class MarkController {
     @Autowired
     MarkService markService;
+    @Autowired
+    SlackClient slackClient;
 
     @RequestMapping(value = "mark/getAll", method = RequestMethod.GET)
 
     public List<Mark> getAllMark() {
 
         List<Mark> marks = markService.gettAllMarks();
+        for (Mark s : marks) {
+            slackClient.sendMessage("Mark id:" + s.getId());
+            slackClient.sendMessage("Mark Grade:" + s.getGrade());
+            slackClient.sendMessage("Mark ObtainedMarks:" + s.getObtainedMarks());
+            slackClient.sendMessage("Mark Active:" + s.getActive());
+            slackClient.sendMessage("Mark CreatedDate:" + s.getCreatedDate());
+            slackClient.sendMessage("Mark UpdatedDate:" + s.getUpdatedDate());
+        }
         return marks;
     }
 

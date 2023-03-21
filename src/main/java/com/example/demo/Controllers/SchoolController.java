@@ -3,6 +3,7 @@ package com.example.demo.Controllers;
 import com.example.demo.Models.School;
 import com.example.demo.RequstObject.SchoolRequestForCreateDateUpdate;
 import com.example.demo.Services.SchoolService;
+import com.example.demo.Slack.SlackClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +18,23 @@ public class SchoolController {
     @Autowired
     SchoolService schoolService;
 
+    @Autowired
+    SlackClient slackClient;
+
+
     @RequestMapping(value = "getAll", method = RequestMethod.GET)
 
     public List<School> getAllSchool() {
 
         List<School> schools = schoolService.getAllSchooles();
+        for (School s : schools) {
+            slackClient.sendMessage("school name:"+s.getName());
+            slackClient.sendMessage("school_id:"+s.getId());
+            slackClient.sendMessage("school_Active:"+s.getActive());
+            slackClient.sendMessage("school_CreateDate:"+s.getCreatedDate());
+            slackClient.sendMessage("school_UpdateDate:"+s.getUpdatedDate());
+
+        }
         return schools;
     }
 
@@ -41,6 +54,11 @@ public class SchoolController {
     @RequestMapping(value = "getByActive")
     public List<School> getByActive() {
         List<School> activeSchoolsList = schoolService.getByActive();
+        for (School s : activeSchoolsList) {
+            slackClient.sendMessage("is Active:"+s.getActive());
+
+
+        }
         return activeSchoolsList;
 
     }
@@ -48,6 +66,10 @@ public class SchoolController {
     @RequestMapping(value = "getByInActive")
     public List<School> getByInActive() {
         List<School> inActiveSchoolsList = schoolService.getByInActive();
+        for (School s : inActiveSchoolsList) {
+            slackClient.sendMessage("in Active:"+s.getActive());
+
+        }
         return inActiveSchoolsList;
 
     }
@@ -55,6 +77,9 @@ public class SchoolController {
     @RequestMapping(value = "getLatestRow", method = RequestMethod.GET)
     public School getLatestRow() {
         School school = schoolService.getLatestRow();
+
+            slackClient.sendMessage("getLatestRow:"+school.getCreatedDate());
+
         return school;
 
     }
@@ -62,6 +87,7 @@ public class SchoolController {
     @RequestMapping(value = " getLatestUpdated", method = RequestMethod.GET)
     public School getLatestUpdated() {
         School school = schoolService.getLatestUpdated();
+        slackClient.sendMessage("getLatestUpdated:"+school.getUpdatedDate());
         return school;
 
     }
@@ -88,12 +114,19 @@ public class SchoolController {
     @RequestMapping(value = "getSchoolCreatedAfterDate", method = RequestMethod.GET)
     public List<School> getSchoolCreatedAfterDate(@RequestParam String createdDate) throws ParseException {
         List<School> schools = schoolService.getSchoolCreatedAfterDate(createdDate);
+        for (School s : schools) {
+            slackClient.sendMessage("getSchoolCreatedAfterDate:"+s.getCreatedDate());
+
+        }
         return schools;
     }
 
     @RequestMapping(value = "getSchoolCreateddDate", method = RequestMethod.GET)
     public List<School> getSchoolCreateddDate(@RequestParam String createdDate) throws ParseException {
         List<School> schools = schoolService.getSchoolByCreatedDate(createdDate);
+        for(School s :schools){
+            slackClient.sendMessage("getSchoolCreatedDate:"+s.getCreatedDate());
+        }
         return schools;
 
     }
@@ -139,6 +172,10 @@ public class SchoolController {
     @RequestMapping(value = "getSchoolByNumberOfStudent", method = RequestMethod.GET)
     public List<School> getSchoolByNumberOfStudent(@RequestParam Integer numberOfStudent) {
         List<School> schoolList = schoolService.getSchoolByNumberOfStudent(numberOfStudent);
+//        for (School s :schoolList){
+//            slackClient.sendMessage("getSchoolByNumberOfStudent:"+s.);
+//
+//        }
         return schoolList;
     }
 

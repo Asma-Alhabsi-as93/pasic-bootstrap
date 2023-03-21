@@ -3,6 +3,7 @@ package com.example.demo.Controllers;
 import com.example.demo.Models.School;
 import com.example.demo.Models.course;
 import com.example.demo.Services.CourseService;
+import com.example.demo.Slack.SlackClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +15,24 @@ import java.util.List;
 public class CourseController {
     @Autowired
     CourseService courseService;
+    @Autowired
+    SlackClient slackClient;
 
     @RequestMapping(value = "getAll", method = RequestMethod.GET)
 
     public List<course> getAllCourse() {
 
         List<course> course = courseService.getAllCourse();
-        return course;
+        for (course s : course) {
+            slackClient.sendMessage("course name:" + s.getName());
+            slackClient.sendMessage("Course id:" + s.getId());
+            slackClient.sendMessage("Course Active:" + s.getActive());
+            slackClient.sendMessage("Student:" + s.getStudent());
+            slackClient.sendMessage("Course CreateDate:" + s.getCreatedDate());
+            slackClient.sendMessage("Course UpdateDate:" + s.getUpdatedDate());
+        }
+            return course;
+
     }
 
     @RequestMapping(value = "getById", method = RequestMethod.GET)

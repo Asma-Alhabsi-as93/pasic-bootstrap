@@ -1,14 +1,8 @@
 package com.example.demo.Controllers;
 
-import com.example.demo.Models.Mark;
-import com.example.demo.Models.School;
-import com.example.demo.Models.Student;
-import com.example.demo.Models.course;
-import com.example.demo.Services.CourseService;
-import com.example.demo.Services.MarkService;
-import com.example.demo.Services.SchoolService;
-import com.example.demo.Services.StudentService;
+import com.example.demo.Slack.SlackClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,16 +11,21 @@ import java.util.List;
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
+@RequestMapping(value="g")
 public class GeneralController {
-    @Autowired
-    StudentService studentService;
-    @Autowired
-    SchoolService schoolService;
+        @Autowired
+        SlackClient slackClient;
 
-    @RequestMapping(value = "Student/getBySchoolName", method = RequestMethod.GET)
-    public List <Student> getStudentBySchoolName(@RequestParam String schoolName) {
-        return studentService.getStudentBySchoolName(schoolName);
-    }
+        @GetMapping(value = "test")
+        public String test(){
+            return "${spring.profiles.active}";
+        }
+
+        @GetMapping(value = "slackMessage")
+        public void message(@RequestParam String text){
+            slackClient.sendMessage(text);
+        }
+
 
     }
 

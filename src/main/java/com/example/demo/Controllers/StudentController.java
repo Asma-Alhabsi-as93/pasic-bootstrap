@@ -2,7 +2,9 @@ package com.example.demo.Controllers;
 
 import com.example.demo.Models.School;
 import com.example.demo.Models.Student;
+import com.example.demo.Services.SchoolService;
 import com.example.demo.Services.StudentService;
+import com.example.demo.Slack.SlackClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +17,27 @@ import java.util.List;
 public class StudentController {
     @Autowired
     StudentService studentService;
-
+    @Autowired
+    SchoolService schoolService;
+    @Autowired
+    SlackClient slackClient;
     @RequestMapping(value = "getAll", method = RequestMethod.GET)
 
     public List<Student> getAllStudents() {
 
         List<Student> students = studentService.getAllStudents();
+
+        for (Student s : students) {
+            slackClient.sendMessage("Student name:"+s.getName());
+            slackClient.sendMessage("Student_id:"+s.getId());
+            slackClient.sendMessage("Student_Active:"+s.getActive());
+            slackClient.sendMessage("Student_RollNumber:"+s.getRollNumber());
+            slackClient.sendMessage("Student_UpdateDate:"+s.getCreatedDate());
+            slackClient.sendMessage("Student_UpdateDate:"+s.getUpdatedDate());
+
+        }
         return students;
+
     }
 
     @GetMapping(value = "addStudent")
@@ -48,6 +64,8 @@ public class StudentController {
         return student;
 
     }
+
+
 
     @RequestMapping(value = "getByActive")
     public List<Student> getByActive() {
@@ -135,5 +153,10 @@ public class StudentController {
 //        List<Student> studentList = studentService.getStudentBySchoolId(schoolId);
 //        return studentList;
 //    }
+
+    @RequestMapping(value = "Student/getBySchoolName", method = RequestMethod.GET)
+    public List <Student> getStudentBySchoolName(@RequestParam String schoolName) {
+        return studentService.getStudentBySchoolName(schoolName);
+    }
 
 }
