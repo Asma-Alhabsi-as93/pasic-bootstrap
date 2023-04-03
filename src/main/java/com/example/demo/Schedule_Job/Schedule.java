@@ -15,6 +15,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class Schedule {
     @Autowired
     MarkService markService;
 
-    @Scheduled(cron = "0 0/15 * * * *")
+        @Scheduled(cron = "0 0/15 * * * *")
     @RequestMapping(value = "getAll", method = RequestMethod.GET)
 
     public List<School> getAllSchool() {
@@ -99,4 +100,11 @@ public class Schedule {
         }
         return marks;
     }
+//    @Scheduled(cron = "0 0/1 * * * *")
+//    @RequestMapping(value = "getById", method = RequestMethod.GET)
+//    public School getSchoolById(@RequestParam Integer schoolId) {
+//        School school = schoolService.getSchoolById(schoolId);
+//        slackClient.sendMessage(schoolService.formatSchoolObjectForSlack(school).toString());
+//        return school;
+//    }
 }

@@ -28,12 +28,12 @@ public class StudentController {
         List<Student> students = studentService.getAllStudents();
 
         for (Student s : students) {
-            slackClient.sendMessage("Student name:"+s.getName());
-            slackClient.sendMessage("Student_id:"+s.getId());
-            slackClient.sendMessage("Student_Active:"+s.getActive());
-            slackClient.sendMessage("Student_RollNumber:"+s.getRollNumber());
-            slackClient.sendMessage("Student_UpdateDate:"+s.getCreatedDate());
-            slackClient.sendMessage("Student_UpdateDate:"+s.getUpdatedDate());
+//            slackClient.sendMessage("Student name:"+s.getName());
+//            slackClient.sendMessage("Student_id:"+s.getId());
+//            slackClient.sendMessage("Student_Active:"+s.getActive());
+//            slackClient.sendMessage("Student_RollNumber:"+s.getRollNumber());
+//            slackClient.sendMessage("Student_UpdateDate:"+s.getCreatedDate());
+//            slackClient.sendMessage("Student_UpdateDate:"+s.getUpdatedDate());
 
         }
         return students;

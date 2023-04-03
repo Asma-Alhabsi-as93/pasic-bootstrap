@@ -25,12 +25,12 @@ public class MarkController {
 
         List<Mark> marks = markService.gettAllMarks();
         for (Mark s : marks) {
-            slackClient.sendMessage("Mark id:" + s.getId());
-            slackClient.sendMessage("Mark Grade:" + s.getGrade());
-            slackClient.sendMessage("Mark ObtainedMarks:" + s.getObtainedMarks());
-            slackClient.sendMessage("Mark Active:" + s.getActive());
-            slackClient.sendMessage("Mark CreatedDate:" + s.getCreatedDate());
-            slackClient.sendMessage("Mark UpdatedDate:" + s.getUpdatedDate());
+//            slackClient.sendMessage("Mark id:" + s.getId());
+//            slackClient.sendMessage("Mark Grade:" + s.getGrade());
+//            slackClient.sendMessage("Mark ObtainedMarks:" + s.getObtainedMarks());
+//            slackClient.sendMessage("Mark Active:" + s.getActive());
+//            slackClient.sendMessage("Mark CreatedDate:" + s.getCreatedDate());
+//            slackClient.sendMessage("Mark UpdatedDate:" + s.getUpdatedDate());
         }
         return marks;
     }

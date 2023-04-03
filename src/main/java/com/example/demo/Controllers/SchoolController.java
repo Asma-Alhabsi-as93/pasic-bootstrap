@@ -28,11 +28,11 @@ public class SchoolController {
 
         List<School> schools = schoolService.getAllSchooles();
         for (School s : schools) {
-            slackClient.sendMessage("school name:"+s.getName());
-            slackClient.sendMessage("school_id:"+s.getId());
-            slackClient.sendMessage("school_Active:"+s.getActive());
-            slackClient.sendMessage("school_CreateDate:"+s.getCreatedDate());
-            slackClient.sendMessage("school_UpdateDate:"+s.getUpdatedDate());
+//            slackClient.sendMessage("school name:"+s.getName());
+//            slackClient.sendMessage("school_id:"+s.getId());
+//            slackClient.sendMessage("school_Active:"+s.getActive());
+//            slackClient.sendMessage("school_CreateDate:"+s.getCreatedDate());
+//            slackClient.sendMessage("school_UpdateDate:"+s.getUpdatedDate());
 
         }
         return schools;
@@ -41,12 +41,14 @@ public class SchoolController {
     @RequestMapping(value = "getById", method = RequestMethod.GET)
     public School getSchoolById(@RequestParam Integer schoolId) {
         School school = schoolService.getSchoolById(schoolId);
+//        slackClient.sendMessage(schoolService.formatSchoolObjectForSlack(school).toString());
         return school;
     }
 
     @RequestMapping(value = "getBySchoolName", method = RequestMethod.GET)
     public School getSchooltBySchoolName(@RequestParam String SchoolName) {
         School school = schoolService.getSchooltBySchoolName(SchoolName);
+//        slackClient.sendMessage(schoolService.formatSchoolObjectForSlack(school).toString());
         return school;
 
     }
@@ -55,7 +57,7 @@ public class SchoolController {
     public List<School> getByActive() {
         List<School> activeSchoolsList = schoolService.getByActive();
         for (School s : activeSchoolsList) {
-            slackClient.sendMessage("is Active:"+s.getActive());
+//            slackClient.sendMessage("is Active:"+s.getActive());
 
 
         }
@@ -67,7 +69,7 @@ public class SchoolController {
     public List<School> getByInActive() {
         List<School> inActiveSchoolsList = schoolService.getByInActive();
         for (School s : inActiveSchoolsList) {
-            slackClient.sendMessage("in Active:"+s.getActive());
+//            slackClient.sendMessage("in Active:"+s.getActive());
 
         }
         return inActiveSchoolsList;
@@ -78,7 +80,7 @@ public class SchoolController {
     public School getLatestRow() {
         School school = schoolService.getLatestRow();
 
-            slackClient.sendMessage("getLatestRow:"+school.getCreatedDate());
+//            slackClient.sendMessage("getLatestRow:"+school.getCreatedDate());
 
         return school;
 
@@ -87,7 +89,7 @@ public class SchoolController {
     @RequestMapping(value = " getLatestUpdated", method = RequestMethod.GET)
     public School getLatestUpdated() {
         School school = schoolService.getLatestUpdated();
-        slackClient.sendMessage("getLatestUpdated:"+school.getUpdatedDate());
+//        slackClient.sendMessage("getLatestUpdated:"+school.getUpdatedDate());
         return school;
 
     }
@@ -115,7 +117,7 @@ public class SchoolController {
     public List<School> getSchoolCreatedAfterDate(@RequestParam String createdDate) throws ParseException {
         List<School> schools = schoolService.getSchoolCreatedAfterDate(createdDate);
         for (School s : schools) {
-            slackClient.sendMessage("getSchoolCreatedAfterDate:"+s.getCreatedDate());
+//            slackClient.sendMessage("getSchoolCreatedAfterDate:"+s.getCreatedDate());
 
         }
         return schools;
@@ -125,7 +127,7 @@ public class SchoolController {
     public List<School> getSchoolCreateddDate(@RequestParam String createdDate) throws ParseException {
         List<School> schools = schoolService.getSchoolByCreatedDate(createdDate);
         for(School s :schools){
-            slackClient.sendMessage("getSchoolCreatedDate:"+s.getCreatedDate());
+//            slackClient.sendMessage("getSchoolCreatedDate:"+s.getCreatedDate());
         }
         return schools;
 

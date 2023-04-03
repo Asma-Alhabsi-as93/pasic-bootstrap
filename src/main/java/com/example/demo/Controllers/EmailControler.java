@@ -2,6 +2,7 @@ package com.example.demo.Controllers;
 
 import com.example.demo.Mail.Model.EmailDetails;
 import com.example.demo.Mail.Service.EmailService;
+import com.example.demo.Slack.SlackClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmailControler {
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    SlackClient slackClient;
     // Sending a simple Email
     @PostMapping("/sendMail")
     public String
